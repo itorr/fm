@@ -266,4 +266,14 @@ fetch('fav-tracks.json').then(r=>r.json()).then(tracks=>{
         }
     }
     window.onhashchange();
+    document.addEventListener('click',_=>{
+        app.play();
+    },{
+        once: true
+    })
+    document.addEventListener('touchstart',_=>{
+        app.play();
+    },{
+        once: true
+    })
 })
