@@ -16,6 +16,13 @@ canvas.width = canvas.height = 1;
 
 const trackCover = canvas.toDataURL();
 
+const play = (paused = audio.paused)=>{
+    if(paused){
+        audio.play();
+    }else{
+        audio.pause();
+    }
+}
 
 const app = new Vue({
     el: '.app',
@@ -144,13 +151,7 @@ const app = new Vue({
             }
             
         },
-        play(){
-            if(audio.paused){
-                audio.play();
-            }else{
-                audio.pause();
-            }
-        },
+        play,
         next(){
             this.randOne();
         },
@@ -266,14 +267,6 @@ fetch('fav-tracks.json').then(r=>r.json()).then(tracks=>{
         }
     }
     window.onhashchange();
-    document.addEventListener('click',_=>{
-        app.play();
-    },{
-        once: true
-    })
-    document.addEventListener('touchstart',_=>{
-        app.play();
-    },{
-        once: true
-    })
+    document.addEventListener('click', _=> play(true), { once: true});
+    document.addEventListener('touchstart', _=> play(true), { once: true});
 })
