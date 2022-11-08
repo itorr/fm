@@ -4,6 +4,9 @@ const $ = s => document.querySelector(s);
 const padLeft = (num, size = 2,w='0') => (w+w+w + num).slice(size * -1);
 const hax2rgb = (hex='333333') => String(hex).match(/\w{2}/g).map(x=>parseInt(x,16));
 const rgb2hax = rgb=>rgb.map(n=>padLeft(n.toString(16),'2')).join('')
+
+// hsl rgb 转换函数 来自
+// https://www.zhangxinxu.com/wordpress/2010/03/javascript-hex-rgb-hsl-color-convert/
 function rgb2hsl([r, g, b]) {
     r /= 255, g /= 255, b /= 255;
     let max = Math.max(r, g, b), min = Math.min(r, g, b);
