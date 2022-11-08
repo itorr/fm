@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="ctrl-box">
-            <!-- <button @click="play()">{{playing?'暂停':'播放'}}</button> -->
+            <button @click="play()">{{playing?'暂停':'播放'}}</button>
             <button @click="next()">下一首</button>
             <button @click="fav()" :data-active="favIds.includes(String(trackId))">收藏</button>
         </div>
