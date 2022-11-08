@@ -1,0 +1,186 @@
+html{
+    color: #333;
+    // @media (max-width:500px) {
+    //     text-align: center;
+    //     .cover{
+    //         margin: 20px auto 10px;
+    //     }
+    // }
+    --current-color: #333;
+    --background-color: #EEE;
+    background-color: var(--background-color);
+    --animation-time: 1s;
+    transition: background-color var(--animation-time) ease;
+}
+.app{
+    transition: color var(--animation-time) ease;
+    color: var(--current-color);
+}
+.cover{
+    margin: 20px 0 10px;
+    width: 260px;
+    height: 260px;
+    border-radius: 4px;
+    background: currentColor no-repeat 50%;
+    background-size: 260px 260px;
+    cursor: pointer;
+    transform-origin: left bottom;
+    transition: 
+        opacity 1s ease, 
+        transform .3s ease,
+        box-shadow var(--animation-time) ease, 
+        background-color var(--animation-time) ease, 
+        background-image 2s ease;
+    &[data-playing="false"]{
+        opacity: .6;
+        transform: scale(.9); //  translateY(14px)
+    }
+}
+body{
+    margin: 0;
+    padding: 20px;
+}
+h1,p{
+    margin: 0;
+}
+audio{
+    display: block;
+    width: 100%;
+}
+button,a{
+    display: inline-block;
+    color: currentColor;
+    text-decoration: none;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 2px solid currentColor;
+    font:inherit;
+    border-radius: 3px;
+    line-height: 1;
+    padding: 10px;
+    margin: 0;
+    font-weight: bold;
+    background-color: transparent;
+    cursor: pointer;
+    outline: none;
+    transition: 
+        background-color var(--animation-time) ease,
+        border-color var(--animation-time) ease,
+        color var(--animation-time) ease;
+
+    &[data-active="true"]{
+        background-color: var(--current-color);
+        border-color: var(--current-color);
+        color: #FFF;
+        &:before{
+            content: '取消';
+        }
+    }
+}
+.info-box{
+    .content{
+        padding: 10px 0 20px;
+        white-space: nowrap;
+
+        h1{
+            font-size: 30px;
+            line-height: 34px;
+            padding: 10px 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        p{
+            opacity: 0.5;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}
+.time-box{
+    overflow: hidden;
+    font-size: 12px;
+    line-height: 20px;
+    pointer-events: none;
+    padding: 10px 0 0;
+    margin-bottom: -10px;
+    .current-time{
+        float: left;
+    }
+    .duration-time{
+        opacity: 0.2;
+        float: right;
+        &:empty{
+            &:before{
+                content: 'loading';
+            }
+        }
+    }
+}
+.progress{
+    position: relative;
+    padding: 10px 0;
+    cursor: pointer;
+    i,b{
+        pointer-events: none;
+        display: block;
+        height:4px;
+        border-radius: 2px;
+        background: currentColor;
+        min-width: 4px;
+    }
+    b{
+        position: absolute;
+        opacity: 0.1;
+    }
+    i{
+       transition: box-shadow .3s ease;
+    }
+    // transition: transform .3s ease;
+    transition: opacity .3s ease;
+    &:hover{
+        i{
+            box-shadow: 0 0 0 .5px currentColor;
+        }
+        // transform: scaleY(1.2);
+    }
+    &[data-loading="true"]{
+        pointer-events: none;
+        opacity: 0.5;
+    }
+}
+
+.bottom-ctrl-box{
+    padding-top: 20px;
+}
+
+.fav-track-list{
+    padding: 40px 0;
+    margin: 0 -20px;
+    overflow: hidden;
+    .item{
+        cursor: pointer;
+        padding: 10px 20px;
+        line-height: 1.4;
+
+        white-space: nowrap;
+
+        h3{
+            margin: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        span{
+            opacity: 0.4;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        &[data-active="true"]{
+            background: var(--current-color);
+            transition: 
+            background-color var(--animation-time) ease,
+            border-color var(--animation-time) ease,
+            color var(--animation-time) ease;
+            color: #FFF;
+        }
+    }
+}

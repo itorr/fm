@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-Hans-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电台</title>
+    <link rel="stylesheet" href="fm.css">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon">
+    <link rel="shortcut icon">
+</head>
+<body>
+    <div class="app" :style="{'--current-color':colorDark}">
+        <div class="info-box" v-if="track">
+            <div class="cover" v-if="trackCover" 
+                @click="play()"
+                :data-playing="String(playing)"
+                :style="{boxShadow:boxShadow,backgroundImage:`url(${trackCover})`}"></div>
+            <div class="content">
+                <h1>{{ track.title }}</h1>
+                <p>{{ fixSub(sub) }}</p>
+            </div>
+        </div>
+        <div class="ctrl-box">
+            <!-- <button @click="play()">{{playing?'暂停':'播放'}}</button> -->
+            <button @click="next()">下一首</button>
+            <button @click="fav()" :data-active="favIds.includes(String(trackId))">收藏</button>
+        </div>
+        <div class="time-box">
+            <span class="current-time"></span>
+            <span class="duration-time"></span>
+
+        </div>
+        <div class="progress" :data-loading="loading">
+            <b></b>
+            <i></i>
+        </div>
+        <!-- <div class="bottom-ctrl-box">
+            <button @click="fav()" :data-active="favIds.includes(String(trackId))">收藏</button>
+            <a :href="src" :download="title">下载</a>
+        </div> -->
+        <div class="fav-track-list">
+            <div class="item" v-for="fav in favTracks" :key="fav.id"
+                :data-active="trackId === fav.id" 
+                @click="go(fav.id)">
+                <h3>{{fav.title}}</h3>
+                <span>{{fixSub(fav.sub)}}</span>
+            </div>
+        </div>
+    </div>
+    <script src="/vue.2.6.11.min.js"></script>
+    <script src="fm-lite.js"></script>
+</body>
+</html>
